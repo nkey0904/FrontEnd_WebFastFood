@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import loginSignupImage from "../assest/login-animation.gif";
 import { Link, useNavigate } from "react-router-dom";
 import { ImagetoBase64 } from "../utility/imagetoBase64";
-
+import {toast} from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -51,8 +51,12 @@ console.log(process.env.REACT_APP_SERVER_DOMIN)
 
         const dataRes = await fetchData.json()
         console.log(dataRes);
-        alert("Successfully")
-        // navigate("/login")
+        // alert(dataRes.message);
+        toast(dataRes.message);
+        if(dataRes.alert){
+          navigate("/login")
+        }
+        
       }
       else {
         alert("Passwords do not match")
