@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import loginSignupImage from "../assest/login-animation.gif";
 import { Link } from "react-router-dom";
+import {toast} from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
 
 const Login = () => {
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
+  const navigate = useNavigate();
+  const userData = useSelector(state => state)
+  console.log(userData.user);
+  const dispatch = useDispatch();
   console.log(data);
   const handleOnChange = (e) => {
     const {name, value} = e.target
@@ -20,11 +25,27 @@ const Login = () => {
       }
     })
   };
-  const handleSubmit = (e)=>{
+  const handleSubmit =async (e)=>{
     e.preventDefault()
     const{email, password} = data
     if(email && password) { 
-      alert("Successfully")
+      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/login`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body : JSON.stringify(data),
+      })
+
+      const dataRes = await fetchData.json()
+      console.log(dataRes);
+      toast(dataRes.message);
+      if(dataRes.alert){
+        dispatch(loginRedux(dataRes));
+        setTimeout(() => {
+          navigate('/')
+        }, 1000);
+      } 
     }
     else {
       alert("Please enter required fields")
