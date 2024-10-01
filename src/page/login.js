@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import loginSignupImage from "../assest/login-animation.gif";
 import { Link } from "react-router-dom";
 import {toast} from "react-hot-toast";
@@ -12,10 +12,13 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const userData = useSelector(state => state)
-  console.log(userData.user);
+  const userData = useSelector(state => state.user);
   const dispatch = useDispatch();
-  console.log(data);
+
+  useEffect(()=>{
+    console.log(userData);
+  }, [userData]);
+
   const handleOnChange = (e) => {
     const {name, value} = e.target
     setData((preve)=>{
@@ -40,6 +43,8 @@ const Login = () => {
       const dataRes = await fetchData.json()
       console.log(dataRes);
       toast(dataRes.message);
+
+
       if(dataRes.alert){
         dispatch(loginRedux(dataRes));
         setTimeout(() => {
