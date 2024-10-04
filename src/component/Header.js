@@ -5,6 +5,7 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import { BsCartFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,6 +18,7 @@ const Header = () => {
   };
   const handleLogout = () => {
     dispatch(logoutRedux())
+    toast("Logout successfully")
   };
   return (
     <header className="fixed shadow-md w-full h-16 px-2 md:px-4 z-50 bg-white">
