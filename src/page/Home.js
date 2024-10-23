@@ -9,9 +9,9 @@ import AllProduct from "../component/AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  const homeProductCartList = productData.slice(1, 5);
-  const homeProductCartListVegetables = productData.filter(
-    (e1) => e1.category === "vegetable",
+  const homeProductCartList = productData.slice(2,6);
+  const homeProductCartListBurger = productData.filter(
+    (e1) => e1.category === "burger",
     []
   );
 
@@ -79,7 +79,7 @@ const Home = () => {
       <div className="">
         <div className="flex w-full items-center">
           <h2 className="font-bold text-2xl text-slate-800 mb-4">
-            Fresh Vegetables
+            Delicious burger for you!
           </h2>
           <div className="ml-auto flex gap-4">
             <button
@@ -100,8 +100,8 @@ const Home = () => {
           className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all"
           ref={slideProductRef}
         >
-          {homeProductCartListVegetables[0]
-            ? homeProductCartListVegetables.map((e1) => {
+          {homeProductCartListBurger[0]
+            ? homeProductCartListBurger.map((e1) => {
                 return (
                   <CardFeature
                     key={e1._id}
