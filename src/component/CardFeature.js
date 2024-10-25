@@ -20,11 +20,11 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
       {image ? (
         <>
           <Link to={`/menu/${id}`} onClick={()=>window.scrollTo({top:"0", behavior : 'smooth'})}>
-          <div className="h-28 flex flex-col justify-center items-center">
-            <img src={image} className="h-full" />
+          <div className="h-28 w-33 flex flex-col justify-center items-center">
+            <img src={image} className="h-full w-full object-cover" />
           </div>
 
-          <h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap overflow-hidden">
+          <h3 className="font-semibold text-slate-600 capitalize text-lg mt-4 whitespace-nowrap overflow-hidden text-ellipsis">
             {name}
           </h3>
           <p className=" text-slate-500 font-medium">{category}</p>

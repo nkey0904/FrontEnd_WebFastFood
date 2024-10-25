@@ -8,8 +8,17 @@ import FilterProduct from "../component/FilterProduct";
 import AllProduct from "../component/AllProduct";
 
 const Home = () => {
+function shuffleArray(array){
+  for(let i =array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i+1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
   const productData = useSelector((state) => state.product.productList);
-  const homeProductCartList = productData.slice(2,6);
+  const productDataCopy = [...productData];
+  const homeProductCartList = shuffleArray(productDataCopy).slice(0,6);
   const homeProductCartListBurger = productData.filter(
     (e1) => e1.category === "burger",
     []
