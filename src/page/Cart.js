@@ -1,22 +1,57 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartProduct from "../component/CartProduct";
-import emptyCartImage from "../assest/empty.gif"
+import emptyCartImage from "../assest/empty.gif";
+import {toast} from "react-hot-toast"
+import {useNavigate} from "react-router-dom"
 const Cart = () => {
+  const navigate = useNavigate();
   const productCartItem = useSelector((state) => state.product.cartItem);
+  const user = useSelector((state) => state.user);
   const totalPrice = productCartItem.reduce((acc, curr) => {
     return acc + parseInt(curr.total);
   }, 0);
   const totalQty = productCartItem.reduce((acc, curr) => {
     return acc + parseInt(curr.qty);
   }, 0);
+
+  const handlePayment = async () => {
+    if (user.email) {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_DOMIN}/create-mock-checkout-session`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productCartItem),
+        }
+      );
+
+      if (!res.ok) {
+        toast.error("An error occurred with mock payment");
+        return navigate("/cancel"); 
+      }
+
+      const data = await res.json();
+      console.log(data);  
+      setTimeout(() => {
+        navigate("/success");
+      }, 1000);
+    } else {
+      toast("You have not logged in!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    }
+  };
   return (
     <>
       <div className="p-2 md:p-4">
         <h2 className="text-lg md:text-2xl font-bold text-slate-600">
           Your Cart Items
         </h2>
-        {productCartItem[0] ?
+        {productCartItem[0] ? (
           <div className="my-4 flex gap-3">
             {/* display cart items */}
             <div className="w-full max-w-3xl">
@@ -50,19 +85,22 @@ const Cart = () => {
                   {totalPrice}
                 </p>
               </div>
-              <button className="bg-red-500 w-full text-lg font-bold py-2 text-white">
+              <button
+                className="bg-red-500 w-full text-lg font-bold py-2 text-white"
+                onClick={handlePayment}
+              >
                 Payment
               </button>
             </div>
           </div>
-          : 
-          <> 
+        ) : (
+          <>
             <div className="flex w-full justify-center items-center flex-col">
-              <img src={emptyCartImage} className="w-full max-w-sm rounded-b"/>
+              <img src={emptyCartImage} className="w-full max-w-sm rounded-b" />
               <p className="text-slate-500 text-3xl font-bold">Empty Cart</p>
             </div>
           </>
-        }
+        )}
       </div>
     </>
   );

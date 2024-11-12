@@ -14,7 +14,6 @@ const Signup = () => {
     confirmPassword: "",
     image:""
   });
-  console.log(data);
   const handleOnChange = (e) => {
     const {name, value} = e.target
     setData((preve)=>{
@@ -50,7 +49,6 @@ console.log(process.env.REACT_APP_SERVER_DOMIN)
         })
 
         const dataRes = await fetchData.json()
-        console.log(dataRes);
         // alert(dataRes.message);
         toast(dataRes.message);
         if(dataRes.alert){
