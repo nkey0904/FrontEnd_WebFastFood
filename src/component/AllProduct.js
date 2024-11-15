@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import FilterProduct from "./FilterProduct";
-import CardFeature from "./CardFeature";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import FilterProduct from './FilterProduct';
+import CardFeature from './CardFeature';
+import { useSelector } from 'react-redux';
 
 const AllProduct = ({ heading }) => {
   const productData = useSelector((state) => state.product.productList);
   const categoryList = [...new Set(productData.map((e1) => e1.category))];
 
   //filter data display
-  const [filterby, setFilterBy] = useState("");
+  const [filterby, setFilterBy] = useState('');
   const [dataFilter, setDataFilter] = useState([]);
 
   useEffect(() => {
@@ -16,9 +16,9 @@ const AllProduct = ({ heading }) => {
   }, [productData]);
 
   const handleFilterProduct = (category) => {
-    setFilterBy(category)
+    setFilterBy(category);
     const filter = productData.filter(
-      (e1) => e1.category.toLowerCase() === category.toLowerCase()
+      (e1) => e1.category.toLowerCase() === category.toLowerCase(),
     );
     setDataFilter(() => {
       return [...filter];
@@ -36,7 +36,7 @@ const AllProduct = ({ heading }) => {
               <FilterProduct
                 category={e1}
                 key={e1}
-                isActive={e1.toLowerCase()===filterby.toLowerCase()}
+                isActive={e1.toLowerCase() === filterby.toLowerCase()}
                 onClick={() => handleFilterProduct(e1)}
               />
             );
@@ -48,23 +48,22 @@ const AllProduct = ({ heading }) => {
         )}
       </div>
       <div className="flex flex-wrap justify-center gap-4 my-4">
-        {dataFilter[0] ? dataFilter.map((e1) => {
-          return (
-            <CardFeature
-              key={e1._id}
-              id={e1._id}
-              image={e1.image}
-              name={e1.name}
-              category={e1.category}
-              price={e1.price}
-            />
-          );
-        })
-        :
-        loadingArrayFeature.map((e1, index) => (
-          <CardFeature loading="Loading..." key={index+ 'allProduct'} />
-        ))
-      }
+        {dataFilter[0]
+          ? dataFilter.map((e1) => {
+              return (
+                <CardFeature
+                  key={e1._id}
+                  id={e1._id}
+                  image={e1.image}
+                  name={e1.name}
+                  category={e1.category}
+                  price={e1.price}
+                />
+              );
+            })
+          : loadingArrayFeature.map((e1, index) => (
+              <CardFeature loading="Loading..." key={index + 'allProduct'} />
+            ))}
       </div>
     </div>
   );

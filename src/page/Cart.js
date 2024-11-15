@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import CartProduct from "../component/CartProduct";
-import emptyCartImage from "../assest/empty.gif";
-import {toast} from "react-hot-toast"
-import {useNavigate} from "react-router-dom"
+import React from 'react';
+import { useSelector } from 'react-redux';
+import CartProduct from '../component/CartProduct';
+import emptyCartImage from '../assest/empty.gif';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 const Cart = () => {
   const navigate = useNavigate();
   const productCartItem = useSelector((state) => state.product.cartItem);
@@ -20,29 +20,30 @@ const Cart = () => {
       const res = await fetch(
         `${process.env.REACT_APP_SERVER_DOMIN}/create-mock-checkout-session`,
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(productCartItem),
-        }
+        },
       );
 
       if (!res.ok) {
-        toast.error("An error occurred with mock payment");
-        return navigate("/cancel"); 
+        const errorData = await res.json();
+        toast.error(errorData.error || 'An error occurred with mock payment');
+        return setTimeout(() => {
+          navigate('/cancel');
+        }, 2000);
       }
-
-      const data = await res.json();
-      console.log(data);  
+      toast.success('Redirecting to payment ...');
       setTimeout(() => {
-        navigate("/success");
-      }, 1000);
+        navigate('/success');
+      }, 2000);
     } else {
-      toast("You have not logged in!");
+      toast('You have not logged in!');
       setTimeout(() => {
-        navigate("/login");
-      }, 1000);
+        navigate('/login');
+      }, 2000);
     }
   };
   return (
@@ -96,7 +97,11 @@ const Cart = () => {
         ) : (
           <>
             <div className="flex w-full justify-center items-center flex-col">
-              <img src={emptyCartImage} className="w-full max-w-sm rounded-b" />
+              <img
+                src={emptyCartImage}
+                alt=""
+                className="w-full max-w-sm rounded-b"
+              />
               <p className="text-slate-500 text-3xl font-bold">Empty Cart</p>
             </div>
           </>

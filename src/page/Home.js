@@ -1,28 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
-import HomeCard from "../component/HomeCard";
-import { useSelector } from "react-redux";
-import CardFeature from "../component/CardFeature";
-import { GrPrevious } from "react-icons/gr";
-import { GrNext } from "react-icons/gr";
-import FilterProduct from "../component/FilterProduct";
-import AllProduct from "../component/AllProduct";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import HomeCard from '../component/HomeCard';
+import { useSelector } from 'react-redux';
+import CardFeature from '../component/CardFeature';
+import { GrPrevious } from 'react-icons/gr';
+import { GrNext } from 'react-icons/gr';
+import FilterProduct from '../component/FilterProduct';
+import AllProduct from '../component/AllProduct';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-function shuffleArray(array){
-  for(let i =array.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i+1));
-    [array[i], array[j]] = [array[j], array[i]];
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
-  return array;
-}
 
   const productData = useSelector((state) => state.product.productList);
   const productDataCopy = [...productData];
-  const homeProductCartList = shuffleArray(productDataCopy).slice(0,6);
+  const homeProductCartList = shuffleArray(productDataCopy).slice(0, 6);
   const homeProductCartListBurger = productData.filter(
-    (e1) => e1.category === "burger",
-    []
+    (e1) => e1.category === 'burger',
+    [],
   );
 
   const loadingArray = new Array(3).fill(null);
@@ -37,7 +37,7 @@ function shuffleArray(array){
   };
 
   //filter data display
-  
+
   return (
     <div className="p-2 md:p-4">
       <div className="md:flex gap-4 py-2">
@@ -50,8 +50,8 @@ function shuffleArray(array){
             />
           </div>
           <h2 className="text-4xl md:text-7xl font-bold py-3">
-            {" "}
-            The Fasted Delivery in{" "}
+            {' '}
+            The Fasted Delivery in{' '}
             <span className="text-red-600 text-">Your Home</span>
           </h2>
           <p className="py-3 text-base">
@@ -62,7 +62,7 @@ function shuffleArray(array){
             only five centuries
           </p>
           <button className="font-bold bg-red-500 text-slate-200 px-4 py-2 rounded-md">
-            <Link to={"menu/67191d28b840d3988a9efd5c"}>Order Now</Link>
+            <Link to={'menu/67191d28b840d3988a9efd5c'}>Order Now</Link>
           </button>
         </div>
 
@@ -81,7 +81,9 @@ function shuffleArray(array){
                 );
               })
             : loadingArray.map((e1, index) => {
-                return <HomeCard key={index+'loading'} loading={"Loading..."} />;
+                return (
+                  <HomeCard key={index + 'loading'} loading={'Loading...'} />
+                );
               })}
         </div>
       </div>
@@ -116,7 +118,7 @@ function shuffleArray(array){
                   <CardFeature
                     key={e1._id}
                     name={e1.name}
-                    id = {e1._id}
+                    id={e1._id}
                     category={e1.category}
                     price={e1.price}
                     image={e1.image}
@@ -124,13 +126,12 @@ function shuffleArray(array){
                 );
               })
             : loadingArrayFeature.map((e1, index) => (
-                <CardFeature loading="Loading..." key = {index+'cartLoading'} />
+                <CardFeature loading="Loading..." key={index + 'cartLoading'} />
               ))}
         </div>
       </div>
-      
-      <AllProduct heading={'Your Product'}/>
-      
+
+      <AllProduct heading={'Your Product'} />
     </div>
   );
 };
