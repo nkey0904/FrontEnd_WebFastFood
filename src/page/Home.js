@@ -9,7 +9,7 @@ import AllProduct from "../component/AllProduct";
 
 const Home = () => {
   const productData = useSelector((state) => state.product.productList);
-  const homeProductCartList = productData.slice(2,6);
+  const homeProductCartList = productData.slice(2, 6);
   const homeProductCartListBurger = productData.filter(
     (e1) => e1.category === "burger",
     []
@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   //filter data display
-  
+
   return (
     <div className="p-2 md:p-4">
       <div className="md:flex gap-4 py-2">
@@ -71,7 +71,9 @@ const Home = () => {
                 );
               })
             : loadingArray.map((e1, index) => {
-                return <HomeCard key={index+'loading'} loading={"Loading..."} />;
+                return (
+                  <HomeCard key={index + "loading"} loading={"Loading..."} />
+                );
               })}
         </div>
       </div>
@@ -106,7 +108,7 @@ const Home = () => {
                   <CardFeature
                     key={e1._id}
                     name={e1.name}
-                    id = {e1._id}
+                    id={e1._id}
                     category={e1.category}
                     price={e1.price}
                     image={e1.image}
@@ -114,13 +116,12 @@ const Home = () => {
                 );
               })
             : loadingArrayFeature.map((e1, index) => (
-                <CardFeature loading="Loading..." key = {index+'cartLoading'} />
+                <CardFeature loading="Loading..." key={index + "cartLoading"} />
               ))}
         </div>
       </div>
-      
-      <AllProduct heading={'Your Product'}/>
-      
+
+      <AllProduct heading={"Your Product"} />
     </div>
   );
 };
