@@ -6,10 +6,22 @@ import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import FilterProduct from "../component/FilterProduct";
 import AllProduct from "../component/AllProduct";
+import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const Home = () => {
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   const productData = useSelector((state) => state.product.productList);
-  const homeProductCartList = productData.slice(2, 6);
+
+  const productDataCopy = [...productData];
+  const homeProductCartList = shuffleArray(productDataCopy).slice(0, 6);
   const homeProductCartListBurger = productData.filter(
     (e1) => e1.category === "burger",
     []
@@ -52,7 +64,7 @@ const Home = () => {
             only five centuries
           </p>
           <button className="font-bold bg-red-500 text-slate-200 px-4 py-2 rounded-md">
-            Order Now
+            <Link to={"menu/67191d28b840d3988a9efd5c"}>Order Now</Link>
           </button>
         </div>
 
@@ -122,6 +134,7 @@ const Home = () => {
       </div>
 
       <AllProduct heading={"Your Product"} />
+      <Footer />
     </div>
   );
 };
