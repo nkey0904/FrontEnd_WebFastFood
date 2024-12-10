@@ -5,7 +5,6 @@ import logo from "../assest/logo-bach-khoa.jpg";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { toast } from "react-hot-toast";
-import Footer from "./Footer";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -75,7 +74,9 @@ const Contact = () => {
       setMessage("");
 
       // Làm mới danh sách đánh giá
-      const updatedFeedbacks = await axios.get("http://localhost:8080/get-contacts");
+      const updatedFeedbacks = await axios.get(
+        "http://localhost:8080/get-contacts"
+      );
       setFeedbacks(updatedFeedbacks.data);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -99,14 +100,21 @@ const Contact = () => {
   return (
     <div className="p-5 bg-cover bg-center bg-no-repeat flex-grow pb-2">
       <h1 className="text-4xl font-bold text-left mb-3">☎️ Contact Us</h1>
-      <p className="text-green-600 text-1xl ml-10">Please fill in the form below!</p>
+      <p className="text-green-600 text-1xl ml-10">
+        Please fill in the form below!
+      </p>
       <div className="flex flex-col md:flex-row gap-10">
         {/* Left side: Contact Form */}
         <div className="flex-1 ml-6 mr-5">
-          <form onSubmit={handleSubmit} className="py-4 border-t flex-col gap-5">
+          <form
+            onSubmit={handleSubmit}
+            className="py-4 border-t flex-col gap-5"
+          >
             {/* Form fields */}
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="font-bold">🧑‍💻 Full Name:</label>
+              <label htmlFor="name" className="font-bold">
+                🧑‍💻 Full Name:
+              </label>
               <input
                 type="text"
                 id="fullname"
@@ -117,7 +125,9 @@ const Contact = () => {
               />
             </div>
             <div className="flex flex-col gap-2 mt-3">
-              <label htmlFor="email" className="font-bold">✉️ Email:</label>
+              <label htmlFor="email" className="font-bold">
+                ✉️ Email:
+              </label>
               <input
                 type="email"
                 id="email"
@@ -128,7 +138,9 @@ const Contact = () => {
               />
             </div>
             <div className="flex flex-col gap-2 mt-3">
-              <label htmlFor="phone" className="font-bold">📞 Phone Number:</label>
+              <label htmlFor="phone" className="font-bold">
+                📞 Phone Number:
+              </label>
               <input
                 type="tel"
                 id="phone"
@@ -139,7 +151,9 @@ const Contact = () => {
               />
             </div>
             <div className="flex flex-col gap-2 mt-3">
-              <label htmlFor="message" className="font-bold">📝 Your Feedback:</label>
+              <label htmlFor="message" className="font-bold">
+                📝 Your Feedback:
+              </label>
               <textarea
                 id="message"
                 placeholder="Type your message here ..."
@@ -170,7 +184,9 @@ const Contact = () => {
         {/* Right side: Address and Map */}
         <div className="flex-1">
           <h2 className="text-2xl font-bold mb-4">🏠 Address</h2>
-          <p className="text-1xl mb-4">So 1 Dai Co Viet, Hai Ba Trung, Ha Noi</p>
+          <p className="text-1xl mb-4">
+            So 1 Dai Co Viet, Hai Ba Trung, Ha Noi
+          </p>
           <div style={{ height: "200px", width: "80%" }}>
             <MapContainer
               center={position}
@@ -197,12 +213,22 @@ const Contact = () => {
             ) : (
               <div className="feedback-list overflow-y-auto max-h-44 border ">
                 {feedbacks.map((feedback) => (
-                  <div key={feedback._id} className="feedback-item border-b py-2 mt-0 ml-2 ">
-                    <p><strong>Full name:</strong> {feedback.name}</p>
-                    <p><strong>Email:</strong> {feedback.email}</p>
-                    <p><strong>Feedback:</strong> {feedback.message}</p>
+                  <div
+                    key={feedback._id}
+                    className="feedback-item border-b py-2 mt-0 ml-2 "
+                  >
+                    <p>
+                      <strong>Full name:</strong> {feedback.name}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {feedback.email}
+                    </p>
+                    <p>
+                      <strong>Feedback:</strong> {feedback.message}
+                    </p>
                     <p className="text-sm text-gray-500">
-                      <strong>Date:</strong> {new Date(feedback.createdAt).toLocaleString()}
+                      <strong>Date:</strong>{" "}
+                      {new Date(feedback.createdAt).toLocaleString()}
                     </p>
                   </div>
                 ))}
@@ -211,8 +237,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

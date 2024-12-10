@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import HomeCard from "../component/HomeCard";
 import { useSelector } from "react-redux";
 import CardFeature from "../component/CardFeature";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
-import FilterProduct from "../component/FilterProduct";
 import AllProduct from "../component/AllProduct";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 
 const Home = () => {
   function shuffleArray(array) {
@@ -134,7 +132,6 @@ const Home = () => {
       </div>
 
       <AllProduct heading={"Your Product"} />
-      <Footer />
     </div>
   );
 };

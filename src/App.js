@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 import { setDataProduct } from './redux/productSlide';
 import { useDispatch, useSelector } from 'react-redux';
+import Footer from './component/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
         <main className="pt-16 bg-slate-100 min-h-[calc(100vh)]">
           <Outlet />
         </main>
+        <Footer />
       </div>
     </>
   );

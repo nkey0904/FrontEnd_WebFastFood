@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faPhone,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   return (
@@ -13,8 +16,8 @@ const Footer = () => {
           <h3 className="text-2xl font-bold text-white mb-4">HUST Food</h3>
           <p>
             "Một cú click, trọn bữa ngon!" Chúng tôi mang đến những món ăn
-            nhanh, chất lượng, và đầy đủ dinh dưỡng, phục vụ mọi đối tượng
-            khách hàng.
+            nhanh, chất lượng, và đầy đủ dinh dưỡng, phục vụ mọi đối tượng khách
+            hàng.
           </p>
           <p className="mt-4">&copy; 2024 HUST Food. All Rights Reserved.</p>
         </div>
@@ -25,16 +28,27 @@ const Footer = () => {
           </h4>
           <ul>
             <li className="mb-2">
-            <Link to="/" className="hover:text-yellow-400">Home</Link>
+              <Link to="/" className="hover:text-yellow-400">
+                Home
+              </Link>
             </li>
             <li className="mb-2">
-            <Link to="/menu/67191d28b840d3988a9efd5c" className="hover:text-yellow-400">Menu</Link>
+              <Link
+                to="/menu/67191d28b840d3988a9efd5c"
+                className="hover:text-yellow-400"
+              >
+                Menu
+              </Link>
             </li>
             <li className="mb-2">
-            <Link to="/about" className="hover:text-yellow-400">About</Link>
+              <Link to="/about" className="hover:text-yellow-400">
+                About
+              </Link>
             </li>
             <li className="mb-2">
-            <Link to="/contact" className="hover:text-yellow-400">Contact</Link>
+              <Link to="/contact" className="hover:text-yellow-400">
+                Contact
+              </Link>
             </li>
           </ul>
         </div>
@@ -44,15 +58,21 @@ const Footer = () => {
             Contact & Hours
           </h4>
           <p>
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="fa fa-map-marker text-yellow-400 mr-2" />
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              className="fa fa-map-marker text-yellow-400 mr-2"
+            />
             So 1 Dai Co Viet, Hai Ba Trung, Ha Noi
           </p>
           <p>
-          <FontAwesomeIcon icon={faPhone} className="text-yellow-400 mr-2" />
+            <FontAwesomeIcon icon={faPhone} className="text-yellow-400 mr-2" />
             +84 123 456 789
           </p>
           <p>
-          <FontAwesomeIcon icon={faEnvelope} className="text-yellow-400 mr-2" />
+            <FontAwesomeIcon
+              icon={faEnvelope}
+              className="text-yellow-400 mr-2"
+            />
             support@hustfood.com
           </p>
           <p className="mt-4">
