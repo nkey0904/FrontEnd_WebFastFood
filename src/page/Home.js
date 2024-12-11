@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import HomeCard from '../component/HomeCard';
-import { useSelector } from 'react-redux';
-import CardFeature from '../component/CardFeature';
-import { GrPrevious } from 'react-icons/gr';
-import { GrNext } from 'react-icons/gr';
-import FilterProduct from '../component/FilterProduct';
-import AllProduct from '../component/AllProduct';
-import { Link } from 'react-router-dom';
+import React, { useRef } from "react";
+import HomeCard from "../component/HomeCard";
+import { useSelector } from "react-redux";
+import CardFeature from "../component/CardFeature";
+import { GrPrevious } from "react-icons/gr";
+import { GrNext } from "react-icons/gr";
+import AllProduct from "../component/AllProduct";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   function shuffleArray(array) {
@@ -18,11 +17,12 @@ const Home = () => {
   }
 
   const productData = useSelector((state) => state.product.productList);
+
   const productDataCopy = [...productData];
   const homeProductCartList = shuffleArray(productDataCopy).slice(0, 6);
   const homeProductCartListBurger = productData.filter(
-    (e1) => e1.category === 'burger',
-    [],
+    (e1) => e1.category === "burger",
+    []
   );
 
   const loadingArray = new Array(3).fill(null);
@@ -50,8 +50,8 @@ const Home = () => {
             />
           </div>
           <h2 className="text-4xl md:text-7xl font-bold py-3">
-            {' '}
-            The Fasted Delivery in{' '}
+            {" "}
+            The Fasted Delivery in{" "}
             <span className="text-red-600 text-">Your Home</span>
           </h2>
           <p className="py-3 text-base">
@@ -62,7 +62,7 @@ const Home = () => {
             only five centuries
           </p>
           <button className="font-bold bg-red-500 text-slate-200 px-4 py-2 rounded-md">
-            <Link to={'menu/67191d28b840d3988a9efd5c'}>Order Now</Link>
+            <Link to={"menu/67191d28b840d3988a9efd5c"}>Order Now</Link>
           </button>
         </div>
 
@@ -82,7 +82,7 @@ const Home = () => {
               })
             : loadingArray.map((e1, index) => {
                 return (
-                  <HomeCard key={index + 'loading'} loading={'Loading...'} />
+                  <HomeCard key={index + "loading"} loading={"Loading..."} />
                 );
               })}
         </div>
@@ -126,12 +126,12 @@ const Home = () => {
                 );
               })
             : loadingArrayFeature.map((e1, index) => (
-                <CardFeature loading="Loading..." key={index + 'cartLoading'} />
+                <CardFeature loading="Loading..." key={index + "cartLoading"} />
               ))}
         </div>
       </div>
 
-      <AllProduct heading={'Your Product'} />
+      <AllProduct heading={"Your Product"} />
     </div>
   );
 };
