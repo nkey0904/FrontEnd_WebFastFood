@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { setDataProduct } from './redux/productSlide';
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from './component/Footer';
+import ScrollToTop from './utility/scrollToTop';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
       <div>
         <Header />
         <main className="pt-16 bg-slate-100 min-h-[calc(100vh)]">
+          <ScrollToTop />
           <Outlet />
         </main>
         <Footer />
