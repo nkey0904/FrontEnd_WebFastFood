@@ -1,0 +1,11 @@
+.carousel-img {
+  border-radius: 15px;
+  width: 100%;
+  height: 680px;
+  object-fit: cover;
+}
+.hero_area .container {
+  max-width: 100%; /* Allow the container to span the full width */
+  width: 90%; /* Full width */
+  padding: 0; /* Remove padding for maximum size */
+}
