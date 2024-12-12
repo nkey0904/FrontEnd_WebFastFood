@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import Header from './component/Header';
-import { Outlet } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
-import { setDataProduct } from './redux/productSlide';
-import { useDispatch, useSelector } from 'react-redux';
-import Footer from './component/Footer';
-import ScrollToTop from './utility/scrollToTop';
+import "./App.css";
+import Header from "./component/Header";
+import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
+import { setDataProduct } from "./redux/productSlide";
+import { useDispatch  } from "react-redux";
+import Footer from "./component/Footer";
+import ScrollToTop from "./utility/scrollToTop";
 
 function App() {
   const dispatch = useDispatch();
-  const productData = useSelector((state) => state.product);
-
   useEffect(() => {
     (async () => {
       const res = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/product`);
       const resData = await res.json();
       dispatch(setDataProduct(resData));
     })();
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Toaster />

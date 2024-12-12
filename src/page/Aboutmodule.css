@@ -1,0 +1,13 @@
+/* Aboutmodule.css */
+.hero_area {
+  background-image: url("../assest/hero-bg.jpg");
+}
+
+.about_section .container {
+  padding-top: 100px;
+}
+
+.about_section .detail-box h2 {
+  font-size: 36px;
+  overflow-x: hidden;
+}
