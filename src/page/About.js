@@ -1,5 +1,3 @@
-// src/component/About.js
-
 import React, { useState, useEffect } from "react";
 import heroBg from "../assest/hero-bg.jpg";
 import aboutimg from "../assest/Burger bacon.jpg";
@@ -11,7 +9,7 @@ import sl4 from "../assest/sl44.webp";
 import sl5 from "../assest/Tarte Flambee.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./Aboutmodule.css"; // Giữ lại nếu cần các kiểu tùy chỉnh khác
+import "./Aboutmodule.css";
 
 const About = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
