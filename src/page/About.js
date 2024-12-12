@@ -1,8 +1,7 @@
+// src/component/About.js
+
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import heroBg from "../assest/hero-bg.jpg";
-import "./Aboutmodule.css";
 import aboutimg from "../assest/Burger bacon.jpg";
 import secsion2 from "../assest/secsion2.jpg";
 import secsion3 from "../assest/secsion3.jpg";
@@ -10,12 +9,13 @@ import sl2 from "../assest/sl333.jpeg";
 import sl3 from "../assest/pexels-valeriya-1639565.jpg";
 import sl4 from "../assest/sl44.webp";
 import sl5 from "../assest/Tarte Flambee.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./Aboutmodule.css"; // Giữ lại nếu cần các kiểu tùy chỉnh khác
 
 const About = () => {
-  const [caption, setCaption] = useState("One click for delicious meals!");
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const captions = [
     "One click for delicious meals!",
@@ -25,209 +25,126 @@ const About = () => {
     "Fast, delicious, delivered right to your door!",
   ];
 
+  const slides = [
+    { src: heroBg, alt: "First slide" },
+    { src: sl2, alt: "Second slide" },
+    { src: sl3, alt: "Third slide" },
+    { src: sl4, alt: "Fourth slide" },
+    { src: sl5, alt: "Fifth slide" },
+  ];
+
   useEffect(() => {
-    const carouselElement = document.getElementById("carouselExampleCaptions");
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 2500); // Thay đổi slide mỗi 2.5 giây
 
-    const handleSlideChange = (event) => {
-      const activeIndex = event.to; // Lấy index của slide hiện tại
-      setCaption(captions[activeIndex]);
-    };
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
-    carouselElement.addEventListener("slid.bs.carousel", handleSlideChange);
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
-    return () => {
-      carouselElement.removeEventListener(
-        "slid.bs.carousel",
-        handleSlideChange
-      );
-    };
-  }, []);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   return (
     <div>
-      {/*{/* Hero Area */}
-      <div className="hero_area">
-        <div className="container mt-5">
+      {/* Hero Area */}
+      <div>
+        <div className="container mx-auto mt-5">
           <h2
-            className="text-right text-red-500 text-2xl"
+            className="text-right text-red-500 text-2xl mb-4"
             style={{
               fontFamily: "'Oleo Script', cursive",
               fontStyle: "italic",
               fontSize: "1.7rem",
             }}
           >
-            {caption}
+            {captions[currentSlide]}
           </h2>
-          <div
-            id="carouselExampleCaptions"
-            className="carousel slide"
-            data-bs-ride="carousel"
-            data-bs-interval="2500"
-          >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  src={heroBg}
-                  alt="First slide"
-                  className="d-block w-100 carousel-img"
-                />
-                <div className="carousel-caption d-none d-md-block"></div>
-              </div>
-              <div className="carousel-item">
-                <img
-                  src={sl2}
-                  alt="Second slide"
-                  className="d-block w-100 carousel-img"
-                />
-                <div className="carousel-caption d-none d-md-block"></div>
-              </div>
-              <div className="carousel-item">
-                <img
-                  src={sl3}
-                  className="d-block w-100 carousel-img"
-                  alt="Third slide"
-                />
-                <div className="carousel-caption d-none d-md-block"></div>
-              </div>
-              <div className="carousel-item">
-                <img src={sl4} className="d-block w-100 carousel-img" />
-                <div className="carousel-caption d-none d-md-block"></div>
-              </div>
-              <div className="carousel-item">
-                <img src={sl5} className="d-block w-100 carousel-img" />
-                <div className="carousel-caption d-none d-md-block"></div>
-              </div>
+          <div className="relative w-full overflow-hidden">
+            <div
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className="w-full flex-shrink-0 flex justify-center"
+                  style={{ height: "650px" }}
+                >
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    className="w-5/6 h-full object-cover"
+                    style={{
+                      borderRadius: "0",
+                      boxShadow: "none",
+                    }}
+                  />
+                </div>
+              ))}
             </div>
+            {/* Nút điều khiển trước */}
             <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleCaptions"
-              data-bs-slide="prev"
+              onClick={prevSlide}
+              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+              aria-label="Previous Slide"
             >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
+              &#10094;
             </button>
+            {/* Nút điều khiển sau */}
             <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleCaptions"
-              data-bs-slide="next"
+              onClick={nextSlide}
+              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
+              aria-label="Next Slide"
             >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
+              &#10095;
             </button>
+            {/* Chỉ số slide */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full ${currentSlide === index ? "bg-red-500" : "bg-gray-300"}`}
+                  aria-label={`Slide ${index + 1}`}
+                ></button>
+              ))}
+            </div>
           </div>
         </div>
-        {/* Header Section */}
-        <header className="header_section">
-          <div className="container">
-            <nav className="navbar navbar-expand-lg custom_nav-container">
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span> </span>
-              </button>
-              <div
-                className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
-                <ul className="navbar-nav mx-auto">
-                  <li className="nav-item">
-                    <a className="nav-link" href="index.html">
-                      Home
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="menu.html">
-                      Menu
-                    </a>
-                  </li>
-                  <li className="nav-item active">
-                    <a className="nav-link" href="about.html">
-                      About <span className="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="book.html">
-                      Book Table
-                    </a>
-                  </li>
-                </ul>
-                <div className="user_option">
-                  <a href="" className="user_link">
-                    <i className="fa fa-user" aria-hidden="true"></i>
-                  </a>
-                  <a className="cart_link" href="#">
-                    <svg
-                      version="1.1"
-                      id="Capa_1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      x="0px"
-                      y="0px"
-                      viewBox="0 0 456.029 456.029"
-                      style={{ enableBackground: "new 0 0 456.029 456.029" }}
-                      xmlSpace="preserve"
-                    >
-                      <g>
-                        <g>
-                          <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                        </g>
-                      </g>
-                      <g>
-                        <g>
-                          <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                        </g>
-                      </g>
-                      <g>
-                        <g>
-                          <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                        </g>
-                      </g>
-                    </svg>
-                  </a>
-                  <form className="form-inline">
-                    <button
-                      className="btn my-2 my-sm-0 nav_search-btn"
-                      type="submit"
-                    >
-                      <i className="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                  </form>
-                  <a href="" className="order_online">
-                    Order Online
-                  </a>
-                </div>
-              </div>
-            </nav>
-          </div>
-        </header>
-        {/* End Header Section */}
       </div>
+
+      {/* Header Section */}
+      <header className="bg-white shadow-md"></header>
+      {/* End Header Section */}
+
       {/* About Section */}
-      <section className="about_section layout_padding ">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="img-box m-4">
-                <img src={aboutimg} alt="" />
+      <section className="about_section py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Image */}
+            <div className="md:w-1/2 p-4">
+              <div className="img-box">
+                <img
+                  src={aboutimg}
+                  alt="About Us"
+                  className="w-full h-1/2 rounded-lg shadow-md"
+                />
               </div>
             </div>
-            <div className="col-md-6">
+
+            {/* Content */}
+            <div className="md:w-1/2 p-4">
               <div className="detail-box">
-                <div className="heading_container">
+                <div className="heading_container mb-4">
                   <h2 className="text-3xl text-black text-center">
                     We Are HUST
                   </h2>
@@ -235,28 +152,34 @@ const About = () => {
                 <div className="text-2xl font-semibold uppercase text-red-500 text-center pb-3">
                   Lời giới thiệu chung
                 </div>
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md ">
-                  <ul className="space-y-2 italic text-center bg-center">
-                    Sứ mệnh và tầm nhìn
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic mt-2">
+                {/* Sứ mệnh và tầm nhìn */}
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md">
+                  <ul className="space-y-2 italic text-center">
+                    <li className="text-lg font-bold text-gray-800">
+                      Sứ mệnh và tầm nhìn
+                    </li>
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg mt-2">
                       <strong>Sứ mệnh: </strong> Tạo ra món ăn nhanh nhưng vẫn
                       đảm bảo dinh dưỡng, phục vụ mọi đối tượng khách hàng, từ
                       trẻ em đến người lớn.
                     </li>
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic">
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg">
                       <strong>Tầm nhìn: </strong> Trở thành chuỗi cửa hàng ăn
                       nhanh đáng tin cậy và phổ biến nhất trong khu vực.
                     </li>
                   </ul>
                 </div>
 
+                {/* Lí do thành lập */}
                 <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md mt-4">
                   <ul className="space-y-2 italic text-center">
-                    Lí do thành lập
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic mt-2">
+                    <li className="text-lg font-bold text-gray-800">
+                      Lí do thành lập
+                    </li>
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg mt-2">
                       Xuất phát từ đam mê với món ăn nhanh của người sáng lập.
                     </li>
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic">
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg">
                       Mong muốn thay đổi cách mọi người nghĩ về "đồ ăn nhanh":
                       không chỉ nhanh mà còn lành mạnh và đầy đủ dinh dưỡng.
                     </li>
@@ -267,47 +190,64 @@ const About = () => {
           </div>
         </div>
       </section>
+      {/* End About Section */}
 
-      <section className="about_section layout_padding mt-12 bg-slate-500 text-white">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="img-box m-4">
-                <img src={secsion2} alt="" />
+      {/* About Section 2 */}
+      <section className="about_section py-12 bg-slate-500 text-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Image */}
+            <div className="md:w-1/2 p-4">
+              <div className="img-box">
+                <img
+                  src={secsion2}
+                  alt="Our Team"
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
               </div>
             </div>
-            <div className="col-md-6">
+
+            {/* Content */}
+            <div className="md:w-1/2 p-4">
               <div className="detail-box">
-                <div className="heading_container">
-                  <h2 className=" text-white text-center pt-3">We Are HUST</h2>
+                <div className="heading_container mb-4">
+                  <h2 className="text-3xl text-white text-center">
+                    We Are HUST
+                  </h2>
                 </div>
                 <div className="text-2xl font-semibold uppercase text-red-500 text-center pb-3">
                   Đội ngũ của chúng tôi
                 </div>
+                {/* Nhân viên phục vụ */}
                 <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md">
                   <ul className="space-y-2 italic text-black text-center">
-                    Nhân viên phục vụ
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic mt-2">
+                    <li className="text-lg font-bold text-gray-800">
+                      Nhân viên phục vụ
+                    </li>
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg mt-2">
                       <strong>Đào tạo chuyên nghiệp: </strong> Tất cả nhân viên
                       đều được đào tạo về cách thức phục vụ chuyên nghiệp và
                       thân thiện.
                     </li>
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic">
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg">
                       <strong>Tương tác với khách hàng: </strong> Tạo môi trường
                       thân thiện, cởi mở cho khách hàng.
                     </li>
                   </ul>
                 </div>
 
+                {/* Đội ngũ chăm sóc khách hàng */}
                 <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md mt-4">
                   <ul className="space-y-2 italic text-black text-center">
-                    Đội ngũ chăm sóc khách hàng
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic mt-2">
+                    <li className="text-lg font-bold text-gray-800">
+                      Đội ngũ chăm sóc khách hàng
+                    </li>
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg mt-2">
                       <strong>Luôn sẵn sàng hỗ trợ: </strong> Đảm bảo rằng mọi
                       vấn đề hoặc thắc mắc của khách hàng đều được giải quyết
                       nhanh chóng.
                     </li>
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic">
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg">
                       <strong>Chính sách hoàn trả: </strong> Thể hiện tính công
                       bằng với chính sách hoàn trả và giải quyết các khiếu nại.
                     </li>
@@ -318,41 +258,59 @@ const About = () => {
           </div>
         </div>
       </section>
+      {/* End About Section 2 */}
 
-      <section className="about_section layout_padding mt-12 ">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="img-box m-4">
-                <img src={secsion3} alt="" />
+      {/* About Section 3 */}
+      <section className="about_section py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center">
+            {/* Image */}
+            <div className="md:w-1/2 p-4">
+              <div className="img-box">
+                <img
+                  src={secsion3}
+                  alt="Thank You"
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
               </div>
             </div>
-            <div className="col-md-6">
+
+            {/* Content */}
+            <div className="md:w-1/2 p-4">
               <div className="detail-box">
-                <div className="heading_container">
-                  <h2 className="text-black text-center">We Are HUST</h2>
+                <div className="heading_container mb-4">
+                  <h2 className="text-3xl text-black text-center">
+                    We Are HUST
+                  </h2>
                 </div>
                 <div className="text-2xl font-semibold uppercase text-red-500 text-center pb-3">
                   Lời Cảm Ơn và Kêu Gọi Hành Động
                 </div>
+                {/* Lời cảm ơn chân thành */}
                 <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md">
                   <ul className="space-y-2 italic text-center">
-                    Lời cảm ơn chân thành
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic mt-2">
+                    <li className="text-lg font-bold text-gray-800">
+                      Lời cảm ơn chân thành
+                    </li>
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg mt-2">
                       Gửi lời cảm ơn chân thành đến khách hàng vì đã ủng hộ và
                       đồng hành cùng cửa hàng trong suốt chặng đường phát triển.
                     </li>
                   </ul>
                 </div>
+
+                {/* Kêu gọi khách hàng tiếp tục lựa chọn */}
                 <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md mt-4">
                   <ul className="space-y-2 italic text-center">
-                    Kêu gọi khách hàng tiếp tục lựa chọn
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic mt-2">
+                    <li className="text-lg font-bold text-gray-800">
+                      Kêu gọi khách hàng tiếp tục lựa chọn
+                    </li>
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg mt-2">
                       <strong>Thử nghiệm ngay hôm nay: </strong> "Hãy đến với
                       chúng tôi để thưởng thức ngay những món ăn ngon lành và
                       tận hưởng trải nghiệm dịch vụ tuyệt vời!"
                     </li>
-                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg not-italic">
+                    <li className="p-2 bg-white rounded-lg shadow-md text-gray-700 text-sm font-medium transform transition-all hover:bg-gray-100 hover:text-red-600 hover:scale-105 hover:shadow-lg">
                       <strong>
                         Mời đăng ký chương trình khách hàng thân thiết:{" "}
                       </strong>{" "}
@@ -366,7 +324,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      {/* End About Section */}
+      {/* End About Section 3 */}
     </div>
   );
 };
