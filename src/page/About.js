@@ -44,7 +44,6 @@ const About = () => {
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
-
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -55,7 +54,7 @@ const About = () => {
       <div>
         <div className="container mx-auto mt-5">
           <h2
-            className="text-right text-red-500 text-xl mb-4"
+            className="text-center text-red-500 text-xl mb-4"
             style={{
               fontFamily: "'Oleo Script', cursive",
               fontStyle: "italic",
@@ -87,7 +86,7 @@ const About = () => {
                 </div>
               ))}
             </div>
-            {/* Nút điều khiển trước */}
+
             <button
               onClick={prevSlide}
               className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
@@ -95,7 +94,7 @@ const About = () => {
             >
               &#10094;
             </button>
-            {/* Nút điều khiển sau */}
+
             <button
               onClick={nextSlide}
               className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75"
@@ -103,7 +102,7 @@ const About = () => {
             >
               &#10095;
             </button>
-            {/* Chỉ số slide */}
+
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
               {slides.map((_, index) => (
                 <button

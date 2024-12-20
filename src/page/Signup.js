@@ -33,34 +33,38 @@ const Signup = () => {
       };
     });
   };
-  console.log(process.env.REACT_APP_SERVER_DOMIN);
+  // console.log(process.env.REACT_APP_SERVER_DOMIN);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstName, email, password, confirmPassword } = data;
-    if (firstName && email && password && confirmPassword) {
+    const { firstName, lastName, email, password, confirmPassword, image } = data;
+    if (firstName && lastName && email && password && confirmPassword && image) {
       if (password === confirmPassword) {
         const fetchData = await fetch(
-          `${process.env.REACT_APP_SERVER_DOMIN}/signup`,
+          `${process.env.REACT_APP_SERVER_DOMIN}/send-otp`,
           {
             method: 'POST',
             headers: {
               'content-type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({firstName, lastName, email, password, confirmPassword, image}),
           },
         );
 
         const dataRes = await fetchData.json();
         // alert(dataRes.message);
         toast(dataRes.message);
+        // console.log(dataRes);
+        
         if (dataRes.alert) {
-          navigate('/login');
+          // navigate('/login');
+          // console.log('Success');
+          navigate('/verifyotp', {state: {email}})
         }
       } else {
-        alert('Passwords do not match');
+        toast.error('Passwords do not match');
       }
     } else {
-      alert('Please enter required fields');
+      toast.error('Please enter required fields, including image');
     }
   };
   return (
@@ -70,6 +74,7 @@ const Signup = () => {
         <div className="w-20 h-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto relative cursor-pointer">
           <img
             src={data.image ? data.image : loginSignupImage}
+            alt=''
             className="w-full h-full"
           />
 
