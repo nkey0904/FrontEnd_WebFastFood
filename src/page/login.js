@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   const handleOnChange = (e) => {
@@ -62,7 +62,7 @@ const Login = () => {
       <div className="w-full max-w-sm bg-white m-auto flex flex-col p-4">
         {/* <h1 className='text-center text-2xl font-bold'>Sign up</h1> */}
         <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md flex m-auto">
-          <img src={loginSignupImage} className="w-full" />
+          <img src={loginSignupImage} alt='' className="w-full" />
         </div>
 
         <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
