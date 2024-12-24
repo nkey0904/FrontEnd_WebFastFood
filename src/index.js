@@ -23,6 +23,8 @@ import Success from "./page/Success";
 import Cancel from "./page/Cancel";
 import ScrollToTop from "./utility/scrollToTop";
 import VerifyOtp from "./page/VerifyOtp";
+import UpdateIF from "./page/UpdateIF";
+import Profile from "./page/Profile"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +41,8 @@ const router = createBrowserRouter(
       <Route path="success" element={<Success />} />
       <Route path="cancel" element={<Cancel />} />
       <Route path="verifyotp" element={<VerifyOtp />} />
+      <Route path ="profile" element = {<Profile/>} />
+      <Route path="updateif" element={<UpdateIF />} />
     </Route>
   )
 );

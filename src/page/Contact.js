@@ -13,17 +13,14 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [submittedData, setSubmittedData] = useState(null);
-
-  const [feedbacks, setFeedbacks] = useState([]); // Danh sách đánh giá
-  const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Gọi API để lấy danh sách đánh giá
     const fetchFeedbacks = async () => {
       try {
         const response = await axios.get("http://localhost:8080/get-contacts");
-        setFeedbacks(response.data); // Lưu đánh giá vào state
+        setFeedbacks(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching feedbacks:", error);
@@ -64,16 +61,11 @@ const Contact = () => {
       setErrorMessage("");
       toast.success(success);
 
-      // Cập nhật thông tin người dùng gửi
-      setSubmittedData({ name, email, phone, message });
-
-      // Reset form
       setName("");
       setEmail("");
       setPhone("");
       setMessage("");
 
-      // Làm mới danh sách đánh giá
       const updatedFeedbacks = await axios.get(
         "http://localhost:8080/get-contacts"
       );
@@ -110,7 +102,6 @@ const Contact = () => {
             onSubmit={handleSubmit}
             className="py-4 border-t flex-col gap-5"
           >
-            {/* Form fields */}
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="font-bold">
                 🧑‍💻 Full Name:
@@ -118,7 +109,7 @@ const Contact = () => {
               <input
                 type="text"
                 id="fullname"
-                placeholder="Nguyen Anh Quan"
+                placeholder="Customer Name"
                 className="shadow-md px-6 py-2 border border-slate-300 w-full text-black"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -131,7 +122,7 @@ const Contact = () => {
               <input
                 type="email"
                 id="email"
-                placeholder="nguyenanhquan@gmail.com"
+                placeholder="Quan123@gmail.com"
                 className="shadow-md px-6 py-2 border border-slate-300 w-full text-black"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -181,42 +172,21 @@ const Contact = () => {
           )}
         </div>
 
-        {/* Right side: Address and Map */}
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold mb-4">🏠 Address</h2>
-          <p className="text-1xl mb-4">
-            So 1 Dai Co Viet, Hai Ba Trung, Ha Noi
-          </p>
-          <div style={{ height: "200px", width: "80%" }}>
-            <MapContainer
-              center={position}
-              zoom={14}
-              style={{ height: "100%" }}
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-              />
-              <Marker position={position} icon={customIcon}>
-                <Popup>So 1 Dai Co Viet, Hai Ba Trung, Ha Noi</Popup>
-              </Marker>
-            </MapContainer>
-          </div>
-
-          {/* Feedback List */}
-          <div className="mt-6 ">
-            <h2 className="text-2xl font-bold">📢 Customer Feedback</h2>
-            {loading ? (
-              <p>Đang tải...</p>
-            ) : feedbacks.length === 0 ? (
-              <p>Chưa có đánh giá nào.</p>
-            ) : (
-              <div className="feedback-list overflow-y-auto max-h-44 border ">
-                {feedbacks.map((feedback) => (
-                  <div
-                    key={feedback._id}
-                    className="feedback-item border-b py-2 mt-0 ml-2 "
-                  >
+        {/* Right side: Feedback List */}
+        <div className="flex- m">
+          <h2 className="text-2xl font-bold mb-2">📢 Customer Feedback</h2>
+          {loading ? (
+            <p>Đang tải...</p>
+          ) : feedbacks.length === 0 ? (
+            <p>Chưa có đánh giá nào.</p>
+          ) : (
+            <div className="feedback-list overflow-y-auto max-h-44 border rounded-lg">
+              {feedbacks.map((feedback) => (
+                <div
+                  key={feedback._id}
+                  className="feedback-item border-b py-2 px-4 flex justify-between items-start"
+                >
+                  <div>
                     <p>
                       <strong>Full name:</strong> {feedback.name}
                     </p>
@@ -231,9 +201,33 @@ const Contact = () => {
                       {new Date(feedback.createdAt).toLocaleString()}
                     </p>
                   </div>
-                ))}
-              </div>
-            )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Address and Map */}
+          <div className="mt-10">
+            <h2 className="text-2xl font-bold ">🏠 Address</h2>
+            <p className="text-1xl mb-4">
+              So 1 Dai Co Viet, Hai Ba Trung, Ha Noi
+            </p>
+            <div style={{ height: "200px", width: "80%" }}>
+              <MapContainer
+                className="overflow-hidden border rounded-lg"
+                center={position}
+                zoom={14}
+                style={{ height: "100%" }}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+                />
+                <Marker position={position} icon={customIcon}>
+                  <Popup>So 1 Dai Co Viet, Hai Ba Trung, Ha Noi</Popup>
+                </Marker>
+              </MapContainer>
+            </div>
           </div>
         </div>
       </div>

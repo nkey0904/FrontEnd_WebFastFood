@@ -31,7 +31,6 @@ const ProductSearch = ({ products, onSearch }) => {
       setLoading(false); 
     }
   };
-
   return (
     <div className="p-4 flex items-center gap-2">
       <input

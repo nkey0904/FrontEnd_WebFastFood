@@ -68,12 +68,20 @@ const Header = () => {
                 )}
 
                 {userData.image ? (
+                  <>
+                  <Link to={"Profile"} className="px-2 py-1 text-gray-600 ">
+                    Profile
+                  </Link>
+                  <Link to={"updateif"} className="px-2 py-1 text-gray-600">
+                    Update Info
+                  </Link>
                   <p
-                    className="cursor-pointer px-2 text-white bg-red-500"
+                    className="cursor-pointer px-2 text-gray-600"
                     onClick={handleLogout}
                   >
                     Logout ({userData.firstName})
                   </p>
+                </>
                 ) : (
                   <Link
                     to={'login'}
