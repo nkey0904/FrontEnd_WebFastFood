@@ -4,19 +4,27 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import { setDataProduct } from "./redux/productSlide";
-import { useDispatch  } from "react-redux";
+import { useDispatch } from "react-redux";
 import Footer from "./component/Footer";
 import ScrollToTop from "./utility/scrollToTop";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     (async () => {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_DOMIN}/product`);
-      const resData = await res.json();
-      dispatch(setDataProduct(resData));
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_SERVER_DOMIN}/product`
+        );
+        const resData = await res.json();
+        dispatch(setDataProduct(resData));
+      } catch (error) {
+        console.error("Failed to fetch product data:", error);
+      }
     })();
   }, [dispatch]);
+
   return (
     <>
       <Toaster />
@@ -24,6 +32,7 @@ function App() {
         <Header />
         <main className="pt-16 bg-slate-100 min-h-[calc(100vh)]">
           <ScrollToTop />
+          {/* Outlet sẽ hiển thị các thành phần con */}
           <Outlet />
         </main>
         <Footer />

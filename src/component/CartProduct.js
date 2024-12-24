@@ -1,19 +1,32 @@
-import React from 'react';
-import { TbPlus, TbMinus } from 'react-icons/tb';
-import { AiFillDelete } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import { TbPlus, TbMinus } from "react-icons/tb";
+import { AiFillDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import {
   decreaseQty,
   deleteCartItem,
   increaseQty,
-} from '../redux/productSlide';
+} from "../redux/productSlide";
 
-const CartProduct = ({ id, name, image, category, qty, total, price }) => {
+const CartProduct = ({
+  id,
+  name,
+  image,
+  category,
+  qty,
+  total,
+  price,
+  discountValue,
+}) => {
   const dispatch = useDispatch();
+
+  // Tính giá trị sau khi áp dụng giảm giá
+  const discountedTotal = total - discountValue;
+
   return (
     <div className="bg-slate-200 p-2 flex gap-4 rounded border border-slate-300">
       <div className="p-3 bg-white rounded overflow-hidden">
-        <img src={image} className="h-28 w-40 object-cover" />
+        <img src={image} className="h-28 w-40 object-cover" alt={name} />
       </div>
       <div className="flex flex-col gap-1 w-full">
         <div className="flex justify-between">
@@ -27,7 +40,7 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
             <AiFillDelete />
           </div>
         </div>
-        <p className="text-slate-500 font-mediuml">{category}</p>
+        <p className="text-slate-500 font-medium">{category}</p>
         <p className="font-bold text-base">
           <span className="text-red-500">$</span>
           <span>{price}</span>
@@ -48,12 +61,19 @@ const CartProduct = ({ id, name, image, category, qty, total, price }) => {
               <TbMinus />
             </button>
           </div>
-          <div className="flex items-center gap-2 font-bold text-slate-700">
-            <p className="">Total : </p>
-            <p>
-              <span className="text-red-500">$</span>
-              {total}
+          <div className="flex flex-col items-end font-bold text-slate-700">
+            <p className="flex gap-2 items-center">
+              Total:
+              <span className="text-red-500">${total}</span>
             </p>
+            {discountValue > 0 && (
+              <p className="flex gap-2 items-center text-green-500 text-sm">
+                Discounted Total:
+                <span className="text-red-500">
+                  ${discountedTotal.toFixed(2)}
+                </span>
+              </p>
+            )}
           </div>
         </div>
       </div>

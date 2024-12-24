@@ -15,6 +15,7 @@ import About from "./page/About";
 import Contact from "./page/Contact";
 import Login from "./page/login";
 import Newproduct from "./page/Newproduct";
+import NewDiscount from "./page/NewDiscount";
 import Signup from "./page/Signup";
 import { store } from "./redux/index";
 import { Provider } from "react-redux";
@@ -25,6 +26,8 @@ import ScrollToTop from "./utility/scrollToTop";
 import VerifyOtp from "./page/VerifyOtp";
 import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
+import UpdateIF from "./page/UpdateIF";
+import Profile from "./page/Profile"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +39,7 @@ const router = createBrowserRouter(
       <Route path="contact" element={<Contact />} />
       <Route path="login" element={<Login />} />
       <Route path="newproduct" element={<Newproduct />} />
+      <Route path="newdiscount" element={<NewDiscount />} />
       <Route path="signup" element={<Signup />} />
       <Route path="cart" element={<Cart />} />
       <Route path="success" element={<Success />} />
@@ -43,6 +47,8 @@ const router = createBrowserRouter(
       <Route path="verifyotp" element={<VerifyOtp />} />
       <Route path="forgotpassword" element={<ForgotPassword />} />
       <Route path="reset-password/:token" element={<ResetPassword />} />
+      <Route path ="/profile/:userId" element = {<Profile/>} />
+      <Route path="updateif" element={<UpdateIF />} />
     </Route>
   )
 );
@@ -50,7 +56,7 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <RouterProvider router={router} fallbackElement={<ScrollToTop/>} />
+    <RouterProvider router={router} fallbackElement={<ScrollToTop />} />
   </Provider>
 );
 

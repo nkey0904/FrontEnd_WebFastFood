@@ -82,7 +82,7 @@ const About = () => {
                       borderRadius: "0",
                       boxShadow: "none",
                     }}
-                  />  
+                  />
                 </div>
               ))}
             </div>
@@ -148,7 +148,7 @@ const About = () => {
                   Lời giới thiệu chung
                 </div>
                 {/* Sứ mệnh và tầm nhìn */}
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md">
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-i">
                   <ul className="space-y-2 italic text-center">
                     <li className="text-lg font-bold text-gray-800">
                       Sứ mệnh và tầm nhìn
@@ -166,7 +166,7 @@ const About = () => {
                 </div>
 
                 {/* Lí do thành lập */}
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md mt-4">
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-sm mt-4 ">
                   <ul className="space-y-2 italic text-center">
                     <li className="text-lg font-bold text-gray-800">
                       Lí do thành lập
@@ -214,7 +214,7 @@ const About = () => {
                   Đội ngũ của chúng tôi
                 </div>
                 {/* Nhân viên phục vụ */}
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md">
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-sm">
                   <ul className="space-y-2 italic text-black text-center">
                     <li className="text-lg font-bold text-gray-800">
                       Nhân viên phục vụ
@@ -232,7 +232,7 @@ const About = () => {
                 </div>
 
                 {/* Đội ngũ chăm sóc khách hàng */}
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md mt-4">
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-sm mt-4">
                   <ul className="space-y-2 italic text-black text-center">
                     <li className="text-lg font-bold text-gray-800">
                       Đội ngũ chăm sóc khách hàng
@@ -282,7 +282,7 @@ const About = () => {
                   Lời Cảm Ơn và Kêu Gọi Hành Động
                 </div>
                 {/* Lời cảm ơn chân thành */}
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md">
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-sm ">
                   <ul className="space-y-2 italic text-center">
                     <li className="text-lg font-bold text-gray-800">
                       Lời cảm ơn chân thành
@@ -295,7 +295,7 @@ const About = () => {
                 </div>
 
                 {/* Kêu gọi khách hàng tiếp tục lựa chọn */}
-                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-md mt-4">
+                <div className="max-w-sm mx-auto p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl shadow-sm mt-4 ">
                   <ul className="space-y-2 italic text-center">
                     <li className="text-lg font-bold text-gray-800">
                       Kêu gọi khách hàng tiếp tục lựa chọn
