@@ -86,6 +86,13 @@ const Login = () => {
             onChange={handleOnChange}
           />
 
+          {/* Phần quên mật khẩu mới thêm vào */}
+          <div className="flex justify-end">
+            <Link to={'/forgotpassword'} className="text-sm text-blue-500 hover:text-blue-600">
+              Quên mật khẩu?
+            </Link>
+          </div>
+
           <button className="w-full max-w-[150px] m-auto bg-red-500 hover:bg-red-600 cursor-pointer text-white text-xl font-medium text-center py-1 rounded-full mt-4">
             Login
           </button>
