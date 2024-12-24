@@ -15,6 +15,7 @@ import About from "./page/About";
 import Contact from "./page/Contact";
 import Login from "./page/login";
 import Newproduct from "./page/Newproduct";
+import NewDiscount from "./page/NewDiscount";
 import Signup from "./page/Signup";
 import { store } from "./redux/index";
 import { Provider } from "react-redux";
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
       <Route path="contact" element={<Contact />} />
       <Route path="login" element={<Login />} />
       <Route path="newproduct" element={<Newproduct />} />
+      <Route path="newdiscount" element={<NewDiscount />} />
       <Route path="signup" element={<Signup />} />
       <Route path="cart" element={<Cart />} />
       <Route path="success" element={<Success />} />
@@ -50,7 +52,7 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <RouterProvider router={router} fallbackElement={<ScrollToTop/>} />
+    <RouterProvider router={router} fallbackElement={<ScrollToTop />} />
   </Provider>
 );
 
