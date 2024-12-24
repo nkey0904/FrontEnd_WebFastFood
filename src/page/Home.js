@@ -55,11 +55,10 @@ const Home = () => {
             <span className="text-red-600 text-">Your Home</span>
           </h2>
           <p className="py-3 text-base">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries
+          🍔 Chào mừng bạn đến với BachKhoaFastFood – 🌟 nơi thỏa mãn niềm đam mê đồ ăn nhanh của bạn! 
+          Từ những chiếc burger nóng hổi, giòn tan 🍔 đến những phần gà rán đậm đà 🍗, chúng tôi mang đến cho 
+          bạn hương vị tuyệt vời và chất lượng hàng đầu. 🚀 Với dịch vụ giao hàng nhanh chóng 📦 và thực đơn 
+          phong phú 🥤🍟, bạn sẽ luôn có một bữa ăn tiện lợi và ngon miệng bất cứ khi nào bạn cần.
           </p>
           <button className="font-bold bg-red-500 text-slate-200 px-4 py-2 rounded-md">
             <Link to={"menu/67191d28b840d3988a9efd5c"}>Order Now</Link>

@@ -11,7 +11,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userData = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  const userId = useSelector((state) => state.user._id);
   const handleShowMenu = () => {
     setShowMenu((preve) => !preve);
   };
@@ -28,7 +28,7 @@ const Header = () => {
       <div className="flex items-center h-full justify-between">
         <Link to={""}>
           <div className="h-10">
-            <img src={logo} alt='' className="h-full" />
+            <img src={logo} alt="" className="h-full" />
           </div>
         </Link>
 
@@ -51,7 +51,7 @@ const Header = () => {
           <div className="text-slate-600 " onClick={handleShowMenu}>
             <div className="text-3xl cursor-pointer w-8 h-8 rounded-full overflow-hidden drop-shadow-md">
               {userData.image ? (
-                <img src={userData.image} alt='' className="h-full w-full" />
+                <img src={userData.image} alt="" className="h-full w-full" />
               ) : (
                 <HiOutlineUserCircle />
               )}
@@ -77,19 +77,23 @@ const Header = () => {
 
                 {userData.image ? (
                   <>
-                  <Link to={"Profile"} className="px-2 py-1 text-gray-600 ">
-                    Profile
-                  </Link>
-                  <Link to={"updateif"} className="px-2 py-1 text-gray-600">
-                    Update Info
-                  </Link>
-                  <p
-                    className="cursor-pointer px-2 text-gray-600"
-                    onClick={handleLogout}
-                  >
-                    Logout ({userData.firstName})
-                  </p>
-                </>
+                    <Link
+                      to={`/profile/${userId}`}
+                      className="px-2 py-1 text-gray-600"
+                    >
+                      Profile
+                    </Link>
+                    <Link to="/updateif" className="px-2 py-1 text-gray-600">
+                      Update Info
+                    </Link>
+
+                    <p
+                      className="cursor-pointer px-2 text-gray-600"
+                      onClick={handleLogout}
+                    >
+                      Logout ({userData.firstName})
+                    </p>
+                  </>
                 ) : (
                   <Link
                     to={"login"}

@@ -1,23 +1,38 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { setUserInfo } from '../redux/updateInfoSlice';
 import { FaUserCircle, FaEnvelope, FaPhone, FaBirthdayCake, FaMapMarkerAlt } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
 
-const Profile = ({ userId }) => {
+const Profile = () => {
+  const { userId } = useParams(); // Lấy userId từ URL
+  console.log(userId);
+  
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.updateif);
 
   useEffect(() => {
-    axios.get(`/get-customer-info/${userId}`)
-      .then(response => {
-        dispatch(setUserInfo(response.data));
+    if (!userId) {
+      console.error("userId is undefined or null");
+      return;
+    }
+  
+    fetch(`http://localhost:8080/get-customer-info/${userId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
       })
-      .catch(error => {
-        console.error("Error fetching user data:", error);
+      .then((data) => {
+        console.log("Fetched data:", data);
+        dispatch(setUserInfo(data));
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error.message);
       });
   }, [userId, dispatch]);
-
+  
   if (!userData) {
     return <div>Loading...</div>;
   }

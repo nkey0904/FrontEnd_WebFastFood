@@ -43,7 +43,7 @@ const router = createBrowserRouter(
       <Route path="success" element={<Success />} />
       <Route path="cancel" element={<Cancel />} />
       <Route path="verifyotp" element={<VerifyOtp />} />
-      <Route path ="profile" element = {<Profile/>} />
+      <Route path ="/profile/:userId" element = {<Profile/>} />
       <Route path="updateif" element={<UpdateIF />} />
     </Route>
   )

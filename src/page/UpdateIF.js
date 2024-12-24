@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaSpinner } from "react-icons/fa"; // Import icon vòng xoay
 
+
 const UpdateIF = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -20,22 +21,19 @@ const UpdateIF = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true); // Đặt trạng thái tải thành true khi bắt đầu gửi dữ liệu
-
+  
     try {
-      const response = await fetch(
-        "http://localhost:8080/update-customer-info",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData), // Gửi form data dưới dạng JSON
-        }
-      );
+      const response = await fetch("http://localhost:8080/update-customer-info", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json", // Đảm bảo rằng header là application/json
+        },
+        body: JSON.stringify(formData), // Gửi form data dưới dạng JSON
+      });
       const result = await response.json();
+  
       if (response.ok) {
         toast.success("Information updated successfully!");
-        // Xử lý thêm thông tin nếu cần
       } else {
         toast.error(result.message || "Error updating information.");
       }
@@ -46,7 +44,7 @@ const UpdateIF = () => {
       setIsLoading(false); // Đặt trạng thái tải về false sau khi hoàn tất
     }
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 pb-10 pt-10">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">

@@ -13,7 +13,7 @@ const updateInfoSlice = createSlice({
   initialState,
   reducers: {
     setUpdateInfo: (state, action) => {
-      state.id_ = action.payload.id_;  // Lưu id_ của người dùng cập nhật
+      state._id = action.payload._id;  // Lưu id_ của người dùng cập nhật
       state.fullName = action.payload.fullName;
       state.email = action.payload.email;
       state.phone = action.payload.phone;
