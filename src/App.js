@@ -28,10 +28,10 @@ function App() {
   return (
     <>
       <Toaster />
+      <ScrollToTop />
       <div>
         <Header />
         <main className="pt-16 bg-slate-100 min-h-[calc(100vh)]">
-          <ScrollToTop />
           {/* Outlet sẽ hiển thị các thành phần con */}
           <Outlet />
         </main>

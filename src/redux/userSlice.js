@@ -26,9 +26,16 @@ export const userSlice = createSlice({
       state.email = '';
       state.image = '';
     },
+    updateUserRedux: (state, action) => {
+      Object.keys(action.payload).forEach((key) => {
+        if (key in state) {
+          state[key] = action.payload[key];
+        }
+      });
+    },
   },
 });
 
-export const { loginRedux, logoutRedux } = userSlice.actions;
+export const { loginRedux, logoutRedux, updateUserRedux } = userSlice.actions;
 
 export default userSlice.reducer;
