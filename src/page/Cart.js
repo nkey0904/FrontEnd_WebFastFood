@@ -207,28 +207,30 @@ const Cart = () => {
             <div className="flex justify-between items-center py-2 text-lg border-b">
               <p className="text-gray-700">Tổng Giá</p>
               <p className="font-bold">
-                <span className="text-red-500">$</span>
-                <span className="text-gray-900">{totalPrice.toFixed(2)}</span>
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(totalPrice)}
               </p>
             </div>
 
             <div className="flex justify-between items-center py-2 text-lg border-b">
               <p className="text-gray-700">Giảm Giá</p>
               <p className="font-bold">
-                <span className="text-red-500">- $</span>
-                <span className="text-gray-900">
-                  {discountValue.toFixed(2)}
-                </span>
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(discountValue)}
               </p>
             </div>
 
             <div className="flex justify-between items-center py-2 text-lg border-b">
               <p className="text-gray-700">Tổng Tiền Cuối Cùng</p>
               <p className="font-bold">
-                <span className="text-red-500">$</span>
-                <span className="text-gray-900">
-                  {(totalPrice - discountValue).toFixed(2)}
-                </span>
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(totalPrice - discountValue)}
               </p>
             </div>
 

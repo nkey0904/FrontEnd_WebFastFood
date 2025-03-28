@@ -42,8 +42,7 @@ const CartProduct = ({
         </div>
         <p className="text-slate-500 font-medium">{category}</p>
         <p className="font-bold text-base">
-          <span className="text-red-500">$</span>
-          <span>{price}</span>
+        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
         </p>
         <div className="flex justify-between">
           <div className="flex gap-3 items-center">
@@ -64,13 +63,13 @@ const CartProduct = ({
           <div className="flex flex-col items-end font-bold text-slate-700">
             <p className="flex gap-2 items-center">
               Total:
-              <span className="text-red-500">${total}</span>
+              <span className="text-red-500">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)}</span>
             </p>
             {discountValue > 0 && (
               <p className="flex gap-2 items-center text-green-500 text-sm">
                 Discounted Total:
                 <span className="text-red-500">
-                  ${discountedTotal.toFixed(2)}
+                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(discountedTotal)}
                 </span>
               </p>
             )}

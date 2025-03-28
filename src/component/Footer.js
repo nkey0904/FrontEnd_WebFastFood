@@ -82,7 +82,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-
       {/* Social Media Links */}
       <div className="mt-8 border-t border-gray-700 pt-4 text-center">
         <h4 className="text-xl font-semibold text-white mb-4">Follow Us</h4>
@@ -104,5 +103,4 @@ const Footer = () => {
     </footer>
   );
 };
-
 export default Footer;

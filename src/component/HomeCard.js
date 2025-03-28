@@ -22,8 +22,7 @@ const HomeCard = ({ name, image, category, price, loading, id }) => {
                   {category}
                 </p>
                 <p className="text-center font-bold">
-                  <span className="text-red-500">$</span>
-                  <span>{price}</span>
+                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)}
                 </p>
               </div>
             </Link>
