@@ -28,6 +28,7 @@ import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
 import UpdateIF from "./page/UpdateIF";
 import Profile from "./page/Profile"
+import PaymentResult from "./page/PaymentResult";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
       <Route path="reset-password/:token" element={<ResetPassword />} />
       <Route path ="/profile/:userId" element = {<Profile/>} />
       <Route path="updateif" element={<UpdateIF />} />
+      <Route path="payment-result" element={<PaymentResult />} />
     </Route>
   )
 );
