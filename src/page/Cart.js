@@ -29,18 +29,18 @@ const Cart = () => {
     return acc + parseInt(curr.qty);
   }, 0);
 
-  // // ✅ Check nếu thanh toán thành công từ localStorage
-  // useEffect(() => {
-  //   const paymentSuccess = sessionStorage.getItem("paymentSuccess");
-  //   if (paymentSuccess === "true") {
-  //     toast.success("Đơn hàng của bạn đã hoàn tất!");
-  //     dispatch(resetCart()); // ✅ gọi action resetCart
-  //     sessionStorage.removeItem("paymentSuccess"); // ✅ xóa flag
-  //     setTimeout(() => {
-  //       navigate("/"); // ✅ chuyển hướng về trang chủ
-  //     }, 3000);
-  //   }
-  // }, [dispatch, navigate]);
+  // ✅ Check nếu thanh toán thành công từ localStorage
+  useEffect(() => {
+    const paymentSuccess = sessionStorage.getItem("paymentSuccess");
+    if (paymentSuccess === "true") {
+      toast.success("Đơn hàng của bạn đã hoàn tất!");
+      dispatch(resetCart()); // ✅ gọi action resetCart
+      sessionStorage.removeItem("paymentSuccess"); // ✅ xóa flag
+      setTimeout(() => {
+        navigate("/"); // ✅ chuyển hướng về trang chủ
+      }, 3000);
+    }
+  }, [dispatch, navigate]);
 
   // Fetch discounts from backend
   useEffect(() => {

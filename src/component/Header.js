@@ -74,19 +74,24 @@ const Header = () => {
                     New Discount
                   </Link>
                 )}
-
                 {userData.image ? (
                   <>
-                    <Link
-                      to={`/profile/${userId}`}
-                      className="px-2 py-1 text-gray-600"
-                    >
-                      Profile
-                    </Link>
-                    <Link to="/updateif" className="px-2 py-1 text-gray-600">
-                      Update Info
-                    </Link>
-
+                    {userData.email !== process.env.REACT_APP_ADMIN_EMAIL && (
+                      <>
+                        <Link
+                          to={`/profile/${userId}`}
+                          className="px-2 py-1 text-gray-600"
+                        >
+                          Profile
+                        </Link>
+                        <Link
+                          to="/updateif"
+                          className="px-2 py-1 text-gray-600"
+                        >
+                          Update Info
+                        </Link>
+                      </>
+                    )}
                     <p
                       className="cursor-pointer px-2 text-gray-600"
                       onClick={handleLogout}
@@ -102,6 +107,7 @@ const Header = () => {
                     Login
                   </Link>
                 )}
+
                 <nav className="text-base md:text-lg flex flex-col md:hidden">
                   <Link to={""} className="px-2 py-1">
                     Home

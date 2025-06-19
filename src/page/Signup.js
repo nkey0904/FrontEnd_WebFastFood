@@ -40,7 +40,7 @@ const Signup = () => {
     if (firstName && lastName && email && password && confirmPassword && image) {
       if (password === confirmPassword) {
         const fetchData = await fetch(
-          `${process.env.REACT_APP_SERVER_DOMIN}/send-otp`,
+          `${process.env.REACT_APP_SERVER_DOMIN}/signup`,
           {
             method: 'POST',
             headers: {
